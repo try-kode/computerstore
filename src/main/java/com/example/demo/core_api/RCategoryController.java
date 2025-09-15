@@ -38,36 +38,35 @@ public class RCategoryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> show(@PathVariable Long id){
-        Category category = categoryServiceImp.getCategoryById(id);
-        if (category != null){
+        try {
+            Category category = categoryServiceImp.getCategoryById(id);
             return ApiResponseStructure.singleResponse("Success", category, HttpStatus.OK);
-        } else {
-            return ApiResponseStructure.singleResponse("Not found", null, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return ApiResponseStructure.singleResponse("Failed: " + e.getMessage() , null, HttpStatus.NOT_FOUND);
         }
-
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody CategoryRequest categoryRequest){
-        Category category = categoryServiceImp.getCategoryById(id);
-        if (category != null){
+        try {
+            Category category = categoryServiceImp.getCategoryById(id);
             category.setCategoryName(categoryRequest.getCategoryName());
             category.setDescription(categoryRequest.getDescription());
             categoryServiceImp.updateCategoryById(id, category);
             return ApiResponseStructure.singleResponse("Updated", category, HttpStatus.CREATED);
-        } else {
-            return ApiResponseStructure.singleResponse("Not found", null, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return ApiResponseStructure.singleResponse("Failed: " + e.getMessage() , null, HttpStatus.NOT_FOUND);
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> delete(@PathVariable Long id){
-        Category category = categoryServiceImp.getCategoryById(id);
-        if (category != null){
+        try {
+            Category category = categoryServiceImp.getCategoryById(id);
             categoryServiceImp.deleteCategoryById(id);
             return ApiResponseStructure.singleResponse("Deleted", category, HttpStatus.OK);
-        } else {
-            return ApiResponseStructure.singleResponse("Not found", null, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return ApiResponseStructure.singleResponse("Failed: " + e.getMessage() , null, HttpStatus.NOT_FOUND);
         }
     }
 }
