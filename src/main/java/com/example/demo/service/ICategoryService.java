@@ -9,4 +9,6 @@ public interface ICategoryService {
     Category createCategory(Category category);
     List<Category> getAllCategories();
     Category getCategoryById(Long id);
+    Category updateCategoryById(Long id, Category category);
+    Category deleteCategoryById(Long id);
 }
