@@ -23,6 +23,6 @@ public class UserServiceImp implements IUserService {
         user.setUuid(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setUserToken("null");
-        return null;
+        return userRepository.save(user);
     }
 }
