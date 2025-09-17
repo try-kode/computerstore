@@ -18,9 +18,14 @@ public class RAuthController {
     @Autowired
     AuthServiceImp authServiceImp;
 
-    @PostMapping("/")
+    @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest){
         User user = authServiceImp.login(loginRequest.getUsername(), loginRequest.getPassword());
-        return ApiResponseStructure.singleResponse("Authenticated", user, HttpStatus.OK);
+        if (user != null){
+            return ApiResponseStructure.singleResponse("Authenticated", user, HttpStatus.OK);
+        } else {
+            return ApiResponseStructure.singleResponse("Authenticate failed", null, HttpStatus.BAD_REQUEST);
+        }
+
     }
 }
