@@ -18,7 +18,7 @@ public class RUserController {
     @Autowired
     UserServiceImp userServiceImp;
 
-    @PostMapping("")
+    @PostMapping("/create")
     public ResponseEntity<Object> create(@RequestBody UserRequest userRequest){
         User user = new User();
         user.setUsername(userRequest.getUsername());
