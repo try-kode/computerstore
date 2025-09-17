@@ -5,9 +5,11 @@ import com.example.demo.repository.UserRepository;
 import com.example.demo.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class UserServiceImp implements IUserService {
 
     @Autowired
