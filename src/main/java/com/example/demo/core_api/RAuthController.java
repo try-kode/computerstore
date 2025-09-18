@@ -24,7 +24,7 @@ public class RAuthController {
         if (user != null){
             return ApiResponseStructure.singleResponse("Authenticated", user, HttpStatus.OK);
         } else {
-            return ApiResponseStructure.singleResponse("Authenticate failed", null, HttpStatus.BAD_REQUEST);
+            return ApiResponseStructure.singleResponse("Authenticate failed", null, HttpStatus.OK);
         }
 
     }
