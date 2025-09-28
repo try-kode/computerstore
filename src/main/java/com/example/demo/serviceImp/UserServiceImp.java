@@ -22,6 +22,7 @@ public class UserServiceImp implements IUserService {
     @Override
     public User createUser(User user) {
         user.setUuid(UUID.randomUUID().toString());
+        user.setUsername(user.getUsername().toLowerCase());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setUserToken("null");
         return userRepository.save(user);

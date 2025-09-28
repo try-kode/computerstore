@@ -18,7 +18,8 @@ public class AuthServiceImp implements IAuthService {
 
     @Override
     public User login(String username, String password) {
-        User user = userRepository.findByUsername(username);
+
+        User user = userRepository.findByUsername(username.toLowerCase());
         if (user != null) {
             if (passwordEncoder.matches(password, user.getPassword())){
                 return user;
