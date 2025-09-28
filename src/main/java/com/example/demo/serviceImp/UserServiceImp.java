@@ -31,4 +31,18 @@ public class UserServiceImp implements IUserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    @Override
+    public User findUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("User not found"));
+    }
+
+    @Override
+    public User deleteUserById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("User not found"));
+        userRepository.deleteById(id);
+        return user;
+    }
 }

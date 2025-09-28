@@ -34,4 +34,11 @@ public class RUserController {
         List<User> userList = userServiceImp.getAllUsers();
         return ApiResponseStructure.singleResponse("Success", userList, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Long id){
+        User user = userServiceImp.findUserById(id);
+        userServiceImp.deleteUserById(id);
+        return ApiResponseStructure.singleResponse("Deleted", user, HttpStatus.OK);
+    }
 }
