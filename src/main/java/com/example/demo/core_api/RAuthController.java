@@ -3,6 +3,7 @@ package com.example.demo.core_api;
 import com.example.demo.model.User;
 import com.example.demo.request.LoginRequest;
 import com.example.demo.serviceImp.AuthServiceImp;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class RAuthController {
     AuthServiceImp authServiceImp;
 
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<Object> login(@Valid @RequestBody LoginRequest loginRequest){
         User user = authServiceImp.login(loginRequest.getUsername(), loginRequest.getPassword());
         if (user != null){
             return ApiResponseStructure.singleResponse("Authenticated", user, HttpStatus.OK);
