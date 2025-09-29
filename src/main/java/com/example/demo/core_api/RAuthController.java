@@ -21,12 +21,15 @@ public class RAuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@Valid @RequestBody LoginRequest loginRequest){
-        User user = authServiceImp.login(loginRequest.getUsername(), loginRequest.getPassword());
-        if (user != null){
-            return ApiResponseStructure.singleResponse("Authenticated", user, HttpStatus.OK);
-        } else {
-            return ApiResponseStructure.singleResponse("Authenticate failed", null, HttpStatus.OK);
+        try {
+            User user = authServiceImp.login(loginRequest.getUsername(), loginRequest.getPassword());
+            if (user != null){
+                return ApiResponseStructure.singleResponse("Authenticated", user, HttpStatus.OK);
+            } else {
+                return ApiResponseStructure.singleResponse("Authenticate failed", null, HttpStatus.OK);
+            }
+        } catch (Exception e){
+            return ApiResponseStructure.singleResponse(e.getMessage(), null, HttpStatus.BAD_REQUEST);
         }
-
     }
 }
