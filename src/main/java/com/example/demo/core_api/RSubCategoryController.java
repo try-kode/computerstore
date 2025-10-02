@@ -39,7 +39,7 @@ public class RSubCategoryController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<Object> update(@PathVariable Long id, @RequestBody SubCategoryRequest subCategoryRequest){
-        SubCategory subCategory = new SubCategory();
+        SubCategory subCategory = subCategoryServiceImp.getSubCategoryById(id);
         subCategory.setSubCategoryName(subCategoryRequest.getSubCategoryName());
         subCategory.setDescription(subCategoryRequest.getDescription());
         subCategory.setCategoryId(subCategoryRequest.getCategoryId());
