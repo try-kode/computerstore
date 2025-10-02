@@ -6,29 +6,22 @@ import lombok.Data;
 import java.util.Date;
 
 @Entity
-@Table(name = "tblProduct")
+@Table(name = "tblSubCategory")
 @Data
-public class Product {
-
+public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productId;
-    private String uuid;
-    private String productCode;
-    private String productName;
-    private String description;
-    private Double price;
-    private Double discount;
-    private String image;
-    private Long categoryId;
     private Long subCategoryId;
-    private Long storeId;
+    private String uuid;
+    private String subCategoryName;
+    private String description;
+    private Long categoryId;
     private String status;
     private String publisher;
     private Date publishedDate;
     private Date modifiedDate;
 
-    public Product() {
+    public SubCategory() {
         this.status = "1";
         this.publisher = "s.admin";
         this.publishedDate = new Date();
