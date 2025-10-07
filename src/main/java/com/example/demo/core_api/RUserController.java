@@ -1,6 +1,7 @@
 package com.example.demo.core_api;
 
 import com.example.demo.model.User;
+import com.example.demo.request.ChangePasswordRequest;
 import com.example.demo.request.UserRequest;
 import com.example.demo.serviceImp.UserServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +41,19 @@ public class RUserController {
         User user = userServiceImp.findUserById(id);
         userServiceImp.deleteUserById(id);
         return ApiResponseStructure.singleResponse("Deleted", user, HttpStatus.OK);
+    }
+
+    @PostMapping("/{userId}/change_password")
+    public ResponseEntity<Object> change_password(@PathVariable Long userId, @RequestBody ChangePasswordRequest changePasswordRequest){
+        User user = userServiceImp.findUserById(userId);
+        if (user != null){
+            User curr = userServiceImp.changePassword(userId, changePasswordRequest.getCurrentPassword(), changePasswordRequest.getNewPassword());
+            if (curr != null){
+                return ApiResponseStructure.singleResponse("Password Changed", curr, HttpStatus.CREATED);
+            } else {
+                return ApiResponseStructure.singleResponse("Current password incorrect", null, HttpStatus.OK);
+            }
+        }
+        return null;
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,5 +46,19 @@ public class UserServiceImp implements IUserService {
                 .orElseThrow(()-> new RuntimeException("User not found"));
         userRepository.deleteById(id);
         return user;
+    }
+
+    @Override
+    public User changePassword(Long userId, String currentPassword, String newPassword) {
+        User curr = userRepository.findById(userId)
+                .orElseThrow(()-> new RuntimeException("userId: "+userId+" not found"));
+        if(passwordEncoder.matches(currentPassword, curr.getPassword())) {
+            curr.setPassword(passwordEncoder.encode(newPassword));
+            curr.setModifiedDate(new Date());
+            return userRepository.save(curr);
+        }
+        else {
+            return null;
+        }
     }
 }

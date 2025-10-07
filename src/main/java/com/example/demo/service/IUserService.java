@@ -9,4 +9,5 @@ public interface IUserService {
     List<User> getAllUsers();
     User findUserById(Long id);
     User deleteUserById(Long id);
+    User changePassword(Long userId, String currentPassword, String newPassword);
 }
