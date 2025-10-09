@@ -1,7 +1,10 @@
 package com.example.demo.serviceImp;
 
+import com.example.demo.model.Store;
 import com.example.demo.model.User;
+import com.example.demo.repository.StoreRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.UserStoreRepository;
 import com.example.demo.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
