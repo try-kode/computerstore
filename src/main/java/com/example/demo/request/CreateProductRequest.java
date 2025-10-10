@@ -14,4 +14,5 @@ public class CreateProductRequest {
     private Long categoryId;
     private Long subCategoryId;
     private Long storeId;
+    private String publisher;
 }

@@ -30,6 +30,7 @@ public class RProductController {
         product.setCategoryId(createProductRequest.getCategoryId());
         product.setSubCategoryId(createProductRequest.getSubCategoryId());
         product.setStoreId(createProductRequest.getStoreId());
+        product.setPublisher(createProductRequest.getPublisher());
 
         productServiceImp.createProduct(product);
         return ApiResponseStructure.singleResponse("Created", product, HttpStatus.CREATED);
